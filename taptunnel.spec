@@ -4,7 +4,7 @@ Name:		taptunnel
 Version:	0.211
 Release:	1
 Vendor:		Lennart Poettering <poettering@gmx.net>
-Copyright:	GPL
+License:	GPL
 Group:		Networking/Utilities
 Group(pl):	Sieciowe/Narzêdzia
 Source0:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
@@ -16,14 +16,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 taptunnel, a TCP/IP-application, which allows to create
-ethernet-tunnels over the Internet or any other TCP/IP-net. It uses the new
-ethertap-device of the Linux kernel 2.2 and above.
+ethernet-tunnels over the Internet or any other TCP/IP-net. It uses
+the new ethertap-device of the Linux kernel 2.2 and above.
 
 %description -l pl
-taptunnel, to aplikacja TCP/IP pozwalaj±ca na tworzenie
-ethernetowych tuneli poprzez Internet lub innych sieci
-TCP/IP. taptunnel u¿ywa nowego urz±dzenia dostêpnego
-w j±drach 2.2.x - urz±dzenie ethertap.
+taptunnel, to aplikacja TCP/IP pozwalaj±ca na tworzenie ethernetowych
+tuneli poprzez Internet lub innych sieci TCP/IP. taptunnel u¿ywa
+nowego urz±dzenia dostêpnego w j±drach 2.2.x - urz±dzenie ethertap.
 
 %prep
 %setup -q
@@ -33,14 +32,14 @@ for a in *.cc; do
 	gcc $RPM_OPT_FLAGS $a -c -I.
 done
 
-gcc $RPM_OPT_FLAGS -s *.o -o %{name} -lmcrypt -L/usr/lib
+gcc $RPM_OPT_FLAGS -s *.o -o %{name} -lmcrypt -L%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_sbindir}
 
-install -d			$RPM_BUILD_ROOT%{_sbindir}
-install -s	%{name}		$RPM_BUILD_ROOT%{_sbindir}
-install 	%{SOURCE1}	.
+install -s %{name} $RPM_BUILD_ROOT%{_sbindir}
+install %{SOURCE1} .
 
 %clean
 rm -rf $RPM_BUILD_ROOT
