@@ -12,7 +12,7 @@ Source1:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/index.htm
 URL:		http://207.236.110.176/~poettering/lennart/projects/taptunnel/
 BuildRequires:	libmcrypt
 Requires:	libmcrypt
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 taptunnel, a TCP/IP-application, which allows to create
