@@ -6,6 +6,7 @@ Release:	1
 Vendor:		Lennart Poettering <poettering@gmx.net>
 License:	GPL
 Group:		Networking/Utilities
+Group(de):	Netzwerkwesen/Werkzeuge
 Group(pl):	Sieciowe/Narzêdzia
 Source0:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
 Source1:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/index.html
@@ -29,16 +30,16 @@ nowego urz±dzenia dostêpnego w j±drach 2.2.x - urz±dzenie ethertap.
 
 %build
 for a in *.cc; do
-	gcc $RPM_OPT_FLAGS $a -c -I.
+	%{__cc} %{rpmcflags} $a -c -I.
 done
 
-gcc $RPM_OPT_FLAGS -s *.o -o %{name} -lmcrypt -L%{_libdir}
+%{__cc} %{rpmcflags} %{rpmldflags} *.o -o %{name} -lmcrypt -L%{_libdir}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sbindir}
 
-install -s %{name} $RPM_BUILD_ROOT%{_sbindir}
+install %{name} $RPM_BUILD_ROOT%{_sbindir}
 install %{SOURCE1} .
 
 %clean
