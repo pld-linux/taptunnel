@@ -1,0 +1,284 @@
+<!-- This document was created with Latte version 2.1 -->
+<!-- For information on Latte, see http://www.latte.org/ -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- File: $Id$ -->
+<!-- Library: $Id$ -->
+<!-- Generated with GNU Emacs, GNU Make, Latte, imgsizer and tidy from index.latte -->
+<head>
+<meta name="generator"
+content="HTML Tidy for Linux/x86 (vers 1st March 2002), see www.w3.org" />
+<meta name="generator" content="Latte 2.1" />
+<title>TapTunnel for Linux 2.2 (OBSOLETE)</title>
+<link type="image/png" rel="icon" href="../../icon.png" />
+<style type="text/css">
+/*<![CDATA[*/
+h1 { font-size: 24pt; color: #00007f; font-family: verdana,arial,sans-serif; font-weight: bold; }
+h2 { font-size: 18pt; color: #00007f; font-family: verdana,arial,sans-serif; font-weight: bold; }
+h3 { font-size: 14pt; color: #00007f; font-family: verdana,arial,sans-serif; font-weight: bold; }
+body,p,li,ol,ul,form,td,div { font-family: verdana,arial,sans-serif; }
+/*]]>*/
+</style>
+
+<style type="text/css">
+/*<![CDATA[*/
+ body {
+  background-color: white;
+  color: black;
+ }
+ :link { color: #0000DD }
+ :visited { color: #0000DD }
+ :active { color: blue }
+ div.c11 {text-align: center}
+ small.c10 {color: #EEEEEE}
+ div.c9 {text-align: right}
+ a.c8 {color: white; font-family: verdana,arial,sans-serif; font-size: 80%}
+ td.c7 {color: white; font-family: verdana,arial,sans-serif; font-size: 80%}
+ p.c6 {color: red}
+ p.c5 {font-style: italic}
+ big.c4 {color: red}
+ a.c3 {font-family: verdana,arial,sans-serif; font-size: 80%}
+ td.c2 {font-family: verdana,arial,sans-serif; font-size: 80%}
+ div.c1 {background-color: #3366cc; color: white; font-family: verdana,arial,sans-serif; font-size: 172%; font-weight: bold; padding: 10px}
+/*]]>*/
+</style>
+</head>
+<body topmargin="50" rightmargin="50" leftmargin="50"
+marginheight="50" marginwidth="50">
+<div class="c1">TapTunnel for Linux 2.2 (OBSOLETE)</div>
+
+<table width="100%" summary="TapTunnel for Linux 2.2 (OBSOLETE)"
+cellspacing="0" cellpadding="3" border="0">
+<tr>
+<td valign="top" align="left" class="c2">Last modified: Tue Mar 26
+23:50:24 CET 2002</td>
+<td valign="top" align="right"><a href="../../index.html"
+class="c3">Index</a></td>
+</tr>
+</table>
+
+<br />
+ <b><big class="c4">Don't use this program any more! It is broken
+and therefore unusable. Moreover it does not work with Kernels
+&gt;= 2.4. I suggest using <a
+href="http://vtun.sourceforge.net">VTUN</a> instead, allthough I
+have not tested it myself.</big></b> 
+
+<p>This is the homepage of taptunnel, a TCP/IP-application, which
+allows to create ethernet-tunnels over the Internet or any other
+TCP/IP-net. It uses the new ethertap-device of the Linux kernel 2.2
+and above. (I believe some 2.1-Kernels have it too.) It is not much
+more than a quick hack, so don't expect too much of it.</p>
+
+<p>It is a single-threaded program, which can be client,
+stand-alone server and INETD-based-server. There is not much
+difference between taptunnel acting as server and as client. The
+connection is encrypted with the routines of the
+cryptography-library <a
+href="http://mcrypt.hellug.gr">mcrypt-nm</a> of <a
+href="mailto:nmav@i-net.paiko.gr">Nikos Mavroyanopoulos</a>. Both
+hosts need to authenticate itself to the other. This is why two
+passwords are needed for TapTunnel's work.</p>
+
+<p><b>Usage</b> Usage example for server (host:
+tapserver.bogus.edu):</p>
+
+<p><tt>ifconfig tap0 192.168.88.88 up</tt><br />
+ <tt>taptunnel -vs -p 1980 -d /dev/tap0 -e 2 -l secret#1 -r
+secret#2</tt></p>
+
+<p class="c5">This means that verbosity is turned on (-v), this
+instance shall work as server (-s), port 1980 shall be used (-p),
+ethertap device '/dev/tap0' shall be used, encryption is done with
+TripleDES and the two secrets 'secret#1' (local, -l) and 'secret#2'
+(remote, -r) are used for encryption. After starting this instance,
+TapTunnel listens on port 1980 for inbound connections.</p>
+
+<p>Usage example for corresponding client:</p>
+
+<p><tt>ifconfig tap0 192.168.88.89 up</tt><br />
+ <tt>taptunnel -vc -p 1980 -d /dev/tap0 -e 2 -l secret#2 -r
+secret#1 -m tapserver.bogus.edu</tt><br />
+ <tt>ping 192.168.88.88</tt></p>
+
+<p class="c5">This means mostly the same as above, but new is the
+switch for configuring taptunnel als client (-c) and the switch for
+defining the hostname of the server to connect to (-m). After
+starting this instance of TapTunnel, the link should work. If the
+ping succeeded, everything went ok.</p>
+
+<p>Usage example for configuration with INETD: Add the following to
+your <tt>/etc/inetd.conf</tt>:</p>
+
+<p><tt>time stream tcp nowait root.root /usr/sbin/taptunnel
+/usr/sbin/taptunnel -i -l secret1 -r secret2 -e 2 -d
+/dev/tap0</tt></p>
+
+<p class="c5">The switch -i is used for activating INETD-support.
+Problem: Because the BSD-INETD has no support for limiting the
+number of paralell instances, the tap-device may be opened by two
+client at the same time. None of them will work with no error. I
+suggest using XINETD instead of INETD.</p>
+
+<p>Usage example for configuration with XINETD. Add the following
+to your <tt>/etc/xinetd.conf</tt>:</p>
+
+<p><tt>service taptunnel<br />
+<br />
+ &#160;&#160;type = UNLISTED<br />
+ &#160;&#160;port = 1980<br />
+ &#160;&#160;user = root<br />
+ &#160;&#160;group = root<br />
+ &#160;&#160;socket_type = stream<br />
+ &#160;&#160;protocol = tcp<br />
+ &#160;&#160;wait = no<br />
+ &#160;&#160;server = /usr/sbin/taptunnel<br />
+ &#160;&#160;server_args = -i -l secret1 -r secret2 -e 2 -d
+/dev/tap0<br />
+ &#160;&#160;instances = 1</tt></p>
+
+<p class="c5">The switch -i is used for activating XINETD-support.
+Important: Only one connection can be made with <tt>/dev/tap0</tt>,
+this is why the "instances = 1" is important.</p>
+
+<p><b>Installation</b> To run the taptunnel, you need Linux Kernel
+2.2.x with compiled in ethertap-device and
+netlink-device-emulation. If you compile both as module you may
+activate autoload of the modules by adding</p>
+
+<p><tt>alias tap0 ethertap</tt><br />
+ <tt>alias char-major-36 netlink_dev</tt></p>
+
+<p>to your <tt>/etc/conf.modules</tt> or
+<tt>/etc/modules.conf</tt>.</p>
+
+<p><b>Encryption</b> The following encryption-algorithms are
+supported: Blowfish (0, 31.1ms), DES (1, 32.5ms), TripleDES (2,
+46.2ms), 3-WAY (3, 32.2ms), GOST (4, 41.5ms), SAFER64 (6, 31.5ms),
+SAFER128 (7, 31.7ms), CAST128 (8, 30.8ms), TEAN (9, 32.1ms),
+TwoFISH (10, 31.6ms). The numbers in brackets are the encryption-ID
+used for the '-e'-switch. The time in 'ms' is the roundtrip-time
+for a ICMP-ECHO-packet (ping) over a TapTunnel-tunnel. These times
+where measured over a 100Mbps-Ethernet, with a Cyrix 6x86MX-233 as
+first host and a P133 as second host. Both running Linux 2.2.4. The
+Roundtrip-time without tunneling is 0.2ms. I suggest to use
+Blowfish-encryption, but you may choose what you want.</p>
+
+<p class="c6"><big><b>I don't know why, but the encryption has been
+broken on some way, it is now incredibly slow. Someone should fix
+this!</b></big></p>
+
+<p><b>Pros and cons</b> Advantages over other solutions like PPP
+over Telnet, PPTP are:</p>
+
+<ul>
+<li>It is fast.</li>
+
+<li>It carries all protocols which work with the ethernet.</li>
+
+<li>You may use it as ethernet-long-distance-bridge.</li>
+
+<li>It is really simple to setup.</li>
+
+<li>It is free. (Published under GPL)</li>
+
+<li>It has no large overhead.</li>
+
+<li>It works.</li>
+
+<li>No plaintext-password are sent over the net.</li>
+
+<li>The connection is encrypted with heavy algorithms.</li>
+
+<li>Because of INETD-support no big server-application will pollute
+your memory, when no connection is active.</li>
+
+<li>It is for LINUX!.</li>
+</ul>
+
+<p>Disadvantages over other solutions:</p>
+
+<ul>
+<li>There is no compression.</li>
+
+<li>It is not multithread, only one connection may be made at a
+time. <i>Solution: Use it together with INETD.</i></li>
+
+<li>There is not the possibility to use dynamic IP-Adresses for the
+tunnel. <i>What the hell do you need them for?</i></li>
+
+<li>No ACLs. <i>Solution: when using with INETD ACLs are supported
+with tcpd. When using with XINETD the ACLs are implemented right in
+the superserver itself.</i></li>
+</ul>
+
+<p><b>Download</b> Get the newest source-codes: <a
+href="taptunnel-0.31-source.tar.gz">taptunnel-0.31-source.tar.gz</a>.</p>
+
+<p>Get older source-codes: <a
+href="taptunnel-0.3-source.tar.gz">taptunnel-0.3-source.tar.gz</a>,
+<a
+href="taptunnel-0.23-source.tar.gz">taptunnel-0.23-source.tar.gz</a>,
+<a
+href="taptunnel-0.22-source.tar.gz">taptunnel-0.22-source.tar.gz</a>,
+<a
+href="taptunnel-0.211-source.tar.gz">taptunnel-0.211-source.tar.gz</a>,
+<a
+href="taptunnel-0.21-source.tar.gz">taptunnel-0.21-source.tar.gz</a>,
+<a
+href="taptunnel-0.2-source.tar.gz">taptunnel-0.2-source.tar.gz</a>,
+<a
+href="taptunnel-0.1-source.tar.gz">taptunnel-0.1-source.tar.gz</a>.</p>
+
+<p>Get the mcrypt-nm-library: <a
+href="http://mcrypt.hellug.gr/lib/">http://mcrypt.hellug.gr/lib/</a>.</p>
+
+<p><b>History</b><br />
+ 8/31/00 Release 0.31: <b>Taptunnel was not compilable.</b><br />
+ 8/29/00 Release 0.3: <b>Some patches from Markus Westergren for
+disabling encryption.</b><br />
+ 8/16/00 Release 0.23: <b>Compatibility with libmcrypt-nm
+0.1.0.</b><br />
+ 12/29/99 Release 0.22: <b>Makefile and compatibility for new
+mcrypt. Updated documentation.</b><br />
+ 6/19/99 Release 0.211: <b>Some fixes.</b><br />
+ 3/29/99 Release 0.21: <b>Fix for INETD-support.</b><br />
+ 3/28/99 Release 0.2: <b>Complete Rewrite; Support for INETD;
+Strong encryption; Moved from C to C++.</b><br />
+ 2/6/99 Release 0.1: <b>Initial release.</b></p>
+
+<p><b>Compilation</b> Just do a "make" and everything should be
+compiled.</p>
+
+<p><b>Notice</b> You must be root to access the tap-device. (The
+permissions of the tap-devices are ignored.)</p>
+
+<p>Development was done on Intel with RedHat 5.1 and rechecked on
+Debian Slink and Potato. Some work was done to make the
+network-protocol system-independent, but I did never execute the
+program on non-Intel-machines.<br clear="all" />
+</p>
+
+<table bgcolor="#3366CC" width="100%"
+summary="Copyright 2000,2001 by El Mezcalero" cellspacing="0"
+cellpadding="3" border="0">
+<tr>
+<td valign="middle" align="left" class="c7"><b>&#160;&#169;
+2000-2002 by El Mezcalero</b></td>
+<td valign="middle" align="right"><a
+href="mailto:mz74617074756e6e656c@poettering.de"
+class="c8"><b>Lennart Poettering</b></a></td>
+</tr>
+</table>
+
+<br />
+ 
+
+<div class="c9"><img border="0" width="1"
+src="http://www.ipstat.com/cgi-bin/ipstat?name=lpoettering"
+height="1" alt="IPSTAT" /></div>
+
+<div class="c11"><small class="c10">$Id: index.latte,v 1.1
+2002/03/26 22:50:24 lennart Exp $</small></div>
+</body>
+</html>
+
