@@ -7,6 +7,7 @@ Vendor:		Lennart Poettering <poettering@gmx.net>
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
+# Source0-md5:	38ae006c7ddc4c653698a2b59740a36f
 Source1:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/index.html
 URL:		http://207.236.110.176/~poettering/lennart/projects/taptunnel/
 BuildRequires:	libmcrypt
