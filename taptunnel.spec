@@ -6,10 +6,6 @@ Release:	1
 Vendor:		Lennart Poettering <poettering@gmx.net>
 License:	GPL
 Group:		Networking/Utilities
-Group(de):	Netzwerkwesen/Werkzeuge
-Group(es):	Red/Utilitarios
-Group(pl):	Sieciowe/Narzêdzia
-Group(pt_BR):	Rede/Utilitários
 Source0:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
 Source1:	http://207.236.110.176/~poettering/lennart/projects/taptunnel/index.html
 URL:		http://207.236.110.176/~poettering/lennart/projects/taptunnel/
