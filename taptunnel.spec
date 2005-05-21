@@ -3,6 +3,7 @@ Summary(pl):	narzêdzie do tworzenia ethernetowych tuneli poprzez sieæ TCP/IP
 Name:		taptunnel
 Version:	0.31
 Release:	1
+Epoch:		1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://0pointer.de/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
