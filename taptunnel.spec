@@ -3,14 +3,12 @@ Summary(pl):	narzêdzie do tworzenia ethernetowych tuneli poprzez sieæ TCP/IP
 Name:		taptunnel
 Version:	0.31
 Release:	1
-Vendor:		Lennart Poettering <poettering@gmx.net>
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://www.stud.uni-hamburg.de/users/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
+Source0:	http://0pointer.de/lennart/projects/taptunnel/%{name}-%{version}-source.tar.gz
 # Source0-md5:	2387595e39056142ba0b4a7286aa983c
-# based on http://www.stud.uni-hamburg.de/users/lennart/projects/taptunnel/index.html
 Source1:	%{name}.html
-URL:		http://www.stud.uni-hamburg.de/users/lennart/projects/taptunnel/
+URL:		http://0pointer.de/lennart/projects/taptunnel/
 BuildRequires:	libmcrypt
 Requires:	libmcrypt
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
