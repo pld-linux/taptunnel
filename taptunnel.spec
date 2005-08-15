@@ -1,5 +1,6 @@
-Summary:	tools for creating ethernet-tunnels over the TCP/IP-net
-Summary(pl):	narzêdzie do tworzenia ethernetowych tuneli poprzez sieæ TCP/IP
+# NOTE: obsolete, for Linux 2.2.x ONLY
+Summary:	Tools for creating ethernet-tunnels over the TCP/IP-net
+Summary(pl):	Narzêdzie do tworzenia ethernetowych tuneli poprzez sieæ TCP/IP
 Name:		taptunnel
 Version:	0.31
 Release:	1
@@ -10,19 +11,21 @@ Source0:	http://0pointer.de/lennart/projects/taptunnel/%{name}-%{version}-source
 # Source0-md5:	2387595e39056142ba0b4a7286aa983c
 Source1:	%{name}.html
 URL:		http://0pointer.de/lennart/projects/taptunnel/
-BuildRequires:	libmcrypt
+BuildRequires:	libmcrypt-devel
 Requires:	libmcrypt
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 taptunnel, a TCP/IP-application, which allows to create
 ethernet-tunnels over the Internet or any other TCP/IP-net. It uses
-the new ethertap-device of the Linux kernel 2.2 and above.
+the ethertap-device specific to Linux kernel 2.2.x (doesn't work with
+2.4.x and newer).
 
 %description -l pl
 taptunnel, to aplikacja TCP/IP pozwalaj±ca na tworzenie ethernetowych
 tuneli poprzez Internet lub innych sieci TCP/IP. taptunnel u¿ywa
-nowego urz±dzenia dostêpnego w j±drach 2.2.x - urz±dzenie ethertap.
+urz±dzenia ethertap specyficznego dla j±der Linuksa 2.2.x (nie dzia³a
+z 2.4.x i nowszymi).
 
 %prep
 %setup -q
