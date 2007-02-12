@@ -1,6 +1,6 @@
 # NOTE: obsolete, for Linux 2.2.x ONLY
 Summary:	Tools for creating ethernet-tunnels over the TCP/IP-net
-Summary(pl.UTF-8):   Narzędzie do tworzenia ethernetowych tuneli poprzez sieć TCP/IP
+Summary(pl.UTF-8):	Narzędzie do tworzenia ethernetowych tuneli poprzez sieć TCP/IP
 Name:		taptunnel
 Version:	0.31
 Release:	1
