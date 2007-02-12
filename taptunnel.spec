@@ -1,6 +1,6 @@
 # NOTE: obsolete, for Linux 2.2.x ONLY
 Summary:	Tools for creating ethernet-tunnels over the TCP/IP-net
-Summary(pl):	Narzêdzie do tworzenia ethernetowych tuneli poprzez sieæ TCP/IP
+Summary(pl.UTF-8):   NarzÄ™dzie do tworzenia ethernetowych tuneli poprzez sieÄ‡ TCP/IP
 Name:		taptunnel
 Version:	0.31
 Release:	1
@@ -21,10 +21,10 @@ ethernet-tunnels over the Internet or any other TCP/IP-net. It uses
 the ethertap-device specific to Linux kernel 2.2.x (doesn't work with
 2.4.x and newer).
 
-%description -l pl
-taptunnel, to aplikacja TCP/IP pozwalaj±ca na tworzenie ethernetowych
-tuneli poprzez Internet lub innych sieci TCP/IP. taptunnel u¿ywa
-urz±dzenia ethertap specyficznego dla j±der Linuksa 2.2.x (nie dzia³a
+%description -l pl.UTF-8
+taptunnel, to aplikacja TCP/IP pozwalajÄ…ca na tworzenie ethernetowych
+tuneli poprzez Internet lub innych sieci TCP/IP. taptunnel uÅ¼ywa
+urzÄ…dzenia ethertap specyficznego dla jÄ…der Linuksa 2.2.x (nie dziaÅ‚a
 z 2.4.x i nowszymi).
 
 %prep
